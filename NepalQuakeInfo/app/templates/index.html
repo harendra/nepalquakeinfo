@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+{% include 'commonlibsheader.html' %}
+
+</head>
+
+<style>
+	.summary{
+		border:1px solid #c0c0c0;
+		padding:5px;
+		margin-left:20px;
+		line-height:15pt;
+	}
+</style>
+
+<body>
+
+{% include 'header.html' %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer" style="background-image:url('/images/quaketemple.jpg')">
+        	<div style="background:white;opacity:0.9;padding:10px;">
+            <h1>Nepal Earthquake 2015</h1>
+            <p>Nepal has been struck by a massive earthquake causing a wide spread damage of life and properties. This site aims to keep track of areas where the help is most needed. This will also aim to track all the lost people and assess damages. Please click the buttons below if you can provide information.</p>
+            <p><a href="/addnewhelpreport" class="btn btn-primary btn-large">Report help</a><span> Report if some help is required.</span>
+            <p><a class="btn btn-primary btn-large">Report lost/found person</a><span> Report if you need to find someone.</span>
+            <p><a class="btn btn-primary btn-large">Report damages.</a><span> Report damaged area/property</span>
+            </p>
+            </div>
+        </header>
+
+        <hr>
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Latest reports for help</h3>
+            </div>
+        </div>
+                <!-- Page Features -->
+        <div class="row summary">
+			1. Report
+        </div>
+        
+        
+         <div class="row">
+            <div class="col-lg-12">
+                <h3>Latest lost/found person</h3>
+            </div>
+        </div>
+                <!-- Page Features -->
+        <div class="row summary">
+			2. Report
+        </div>
+        
+        
+         <div class="row">
+            <div class="col-lg-12">
+                <h3>Latest damages reported.</h3>
+            </div>
+        </div>
+                <!-- Page Features -->
+        <div class="row summary">
+			3.Report
+        </div>
+        <!-- /.row -->
+
+
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+{% include 'commonlibsfooter.html' %}
+
+</body>
+
+</html>

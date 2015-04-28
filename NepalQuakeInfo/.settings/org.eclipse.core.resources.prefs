@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//app/basehandler/BaseHandler.py=utf-8
+encoding//app/config.py=utf-8
+encoding//app/datahandlers/DataHandlerNDB.py=utf-8
+encoding//app/set_sys_path.py=utf-8
+encoding//app/urls.py=utf-8
+encoding//app/utils/OutputVerifier.py=utf-8
+encoding/<project>=UTF-8
