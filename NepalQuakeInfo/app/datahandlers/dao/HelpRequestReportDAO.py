@@ -3,7 +3,7 @@ Created on Apr 29, 2015
 
 @author: harendra
 '''
-from datahandlers.DataHandlerNDB import GenericHandler
+from datahandlers.DataHandlerNDB import GenericHandler, DataHandlerNDB
 from model.mainmodels import HelpRequestReport
 
 class HelpRequestReportDAO(GenericHandler):
@@ -15,7 +15,8 @@ class HelpRequestReportDAO(GenericHandler):
         super(HelpRequestReportDAO,self).__init__(HelpRequestReport,data=inputdata,objectid=objectid)
     
     def get_data(self):
-        return self.entity
+        handler=DataHandlerNDB()
+        return handler.getEntityDict(self.entity)
     
     def write_values(self):
         self.update_entity(self.inputdata)

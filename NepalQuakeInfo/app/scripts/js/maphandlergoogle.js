@@ -75,6 +75,23 @@ function MapHandlerG() {
         createMarker(latlng, 'name', 'location');
     }
     
+    this.createCenteredMapWithMarker = function(containerID, lat, lng, zoomlevel) {
+        if (zoomlevel == null) {
+            zoomlevel = 5;
+        }
+        var myOptions = {
+            zoom : zoomlevel,
+            center : new google.maps.LatLng(lat, lng),
+            mapTypeControl : true,
+            mapTypeControlOptions : {
+                style : google.maps.MapTypeControlStyle.DROPDOWN_MENU
+            },
+            navigationControl : true,
+            mapTypeId : google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById(containerID), myOptions);
+    }
+    
     function createMarkerWithLinks(latlng, name, html, link) {
         marker = createMarker(latlng, name, html);
         google.maps.event.addListener(marker, 'click', function() {

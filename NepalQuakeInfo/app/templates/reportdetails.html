@@ -21,7 +21,7 @@
 
     <!-- Page Content -->
     <div class="container">
-    <h1>Latest reports for help needed.</h1>
+    <h1>Report details.</h1>
     <div class="mapcontainer">
 			<div id="canvas"></div>
 		</div>
@@ -32,7 +32,6 @@
 	</div>
 	<table class="table table-bordered">
 	  <tr>
-	  	  <th>#</th>
 		  <th>Date</th>
 		  <th>Type of help</th>
 		  <th>Address</th>
@@ -40,26 +39,21 @@
 		  <th>Reported By</th>	  
 	  </tr>
 	  
-	  {% for item in data %}
 	  	<tr>
-	  		<td rowspan="2">{{loop.index}}</td>
-	  		<td>{{item.reported_date}}</td>
-	  		<td>{{item.help_type}}</td>
-	  		<td>{{item.help_address}}</td>
-	  		<td>{{item.status}}</td>
-	  		<td>{{item.reporter_name}}<br/>({{item.reporter_phone}})</td>
+	  		<td>{{data.reported_date}}</td>
+	  		<td>{{data.help_type}}</td>
+	  		<td>{{data.help_address}}</td>
+	  		<td>{{data.status}}</td>
+	  		<td>{{data.reporter_name}}<br/>({{data.reporter_phone}})</td>
 	  	</tr>
 	  	<tr>
 	  	<td colspan="5">
-	  	<div>{{item.details}}</div>
-	  	<div><a href="/reportdetails?reportid={{item.objectid}}">Link to this item</a></div>
+	  	<div>{{data.details}}</div>
 	  	</td>
 	  	</tr>
 	  	
-	  {% endfor %}
 	</table>
 	
-	<a href="/helpreports?pageno={{nextpage}}" class="btn btn-success submit">Next</a>
     <!-- /.container -->
 
 {% include 'commonlibsfooter.html' %}

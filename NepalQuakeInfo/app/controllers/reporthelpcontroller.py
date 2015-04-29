@@ -82,7 +82,23 @@ class HelpReportRequestGetter(BaseHandler):
         entities=helpdao.search(HelpRequestReport, offset=(pageno-1)*20, total=20)
         en=OutputVerifier(entities)
         verified_entities=en.verify()
+        logging.info(verified_entities)
         return verified_entities
+    
+
+class HelpReportRequestDetailsGetter(BaseHandler):    
+    def get(self):
+        getparams=self.request.GET
+        objectid=getparams["reportid"]
+        data=self.getData(objectid)
+        mapdata=[{"latitude":data["latitude"],"longitude":data["longitude"]}]
+        result={"result":"success","data":data,"mapdata":json.dumps(mapdata)}
+        self.render_response("reportdetails.html",**result)
+    
+    def getData(self,objectid):
+        helpdao=HelpRequestReportDAO(None,False,objectid)
+        data=helpdao.get_data()
+        return data
         
         
         

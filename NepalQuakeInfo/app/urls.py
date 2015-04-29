@@ -7,6 +7,7 @@ routes = [
           (r'/addnewhelpreport','controllers.reporthelpcontroller.HelpReportRequestAdder'),
           (r'/thanks','controllers.reporthelpcontroller.Thanks'),  
           (r'/helpreports','controllers.reporthelpcontroller.HelpReportRequestGetter'),
+          (r'/reportdetails','controllers.reporthelpcontroller.HelpReportRequestDetailsGetter'),
           
           ]
 

@@ -161,7 +161,10 @@ class GenericHandler(object):
         entities=handlerndb.getAllEntities(object_type, total=total, offsetvalue=offset,filters=filter, orderby=orderby)
         serializedEntities=[]
         for entity in entities:
-            serializedEntities.append(handlerndb.getEntityDict(entity))
+            objectid=handlerndb.getEntityID(entity)
+            serializeddict=handlerndb.getEntityDict(entity)
+            serializeddict["objectid"]=objectid
+            serializedEntities.append(serializeddict)
         return serializedEntities
 
     def persist(self):

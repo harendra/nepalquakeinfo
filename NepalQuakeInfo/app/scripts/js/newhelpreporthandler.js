@@ -56,7 +56,7 @@ function NewReportHandler(){
 				imagelink:imagelink
 		};
 		
-		//displayWait("wait");
+		displayWait("wait");
 		console.log(sendobject);
 		
 		$.post("/addnewhelpreport",sendobject,function(result){
