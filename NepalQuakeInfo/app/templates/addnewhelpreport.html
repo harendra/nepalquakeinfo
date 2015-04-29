@@ -21,7 +21,7 @@
 
 #canvas{
 	width:400px;
-	height:150px;
+	height:300px;
 }
 
 </style>
@@ -31,6 +31,7 @@
 	{% include 'header.html' %}
 
 	<!-- Page Content -->
+	<form action="addnewhelpreport" method="post">
 	<div class="container">
 		<h1>Please enter the details of needed help.</h1>
 		<div class="form-group">
@@ -43,28 +44,28 @@
 			<div class="inputgroup">
 				<div class="textlabel">Your Full name</div>
 				<div class="field">
-					<input class="reporter_name form-control">
+					<input name="reporter_name" class="reporter_name form-control">
 				</div>
 			</div>
 
 			<div class="inputgroup">
 				<div class="textlabel">Your Email*</div>
 				<div class="field">
-					<input class="reporter_email form-control">
+					<input name="reporter_email" class="reporter_email form-control">
 				</div>
 			</div>
 
 			<div class="inputgroup">
 				<div class="textlabel">Your Phone Number</div>
 				<div class="field">
-					<input class="reporter_phone form-control">
+					<input name="report_phone" class="reporter_phone form-control">
 				</div>
 			</div>
 
 			<div class="inputgroup">
 				<div class="textlabel">What type of help is needed?*</div>
 				<div class="field">
-				<select class="form-control">
+				<select name="help_type" class="form-control">
 					<option value="Food">Food</option>
 					<option value="Water">Water</option>
 					<option value="Rescue">Rescue</option>
@@ -77,14 +78,14 @@
 			<div class="inputgroup">
 				<div class="textlabel">Details about needed help.*</div>
 				<div class="field">
-					<textarea class="freetext form-control"></textarea>
+					<textarea name="freetext" class="freetext form-control"></textarea>
 				</div>
 			</div>
 			
 			<div class="inputgroup">
 				<div class="textlabel"> Help needed location? *</div>
 				<div class="field">
-					<input class="help_address form-control">
+					<input name="help_address" class="help_address form-control">
 				</div>
 			</div>
 			
@@ -92,29 +93,30 @@
 			<div class="inputgroup">
 				<div class="textlabel">Latitude</div>
 				<div class="field">
-					<input class="latitude form-control">
+					<input name="latitude" class="latitude form-control">
 				</div>
 			</div>
 
 			<div class="inputgroup">
 				<div class="textlabel">Longitude</div>
 				<div class="field">
-					<input class="longitude form-control">
+					<input name="longitude" class="longitude form-control">
 				</div>
 			</div>
 			
 			<div class="inputgroup">
 				<div class="textlabel">Photo</div>
 				<div class="field">
-					<input class="imagelink form-control">
+					<input name="imagelink" class="imagelink form-control">
 				</div>
 			</div>
 
 		</div>
 		
-		<div class="btn btn-success">Submit</div>
+		<button type="submit" class="btn btn-default"> Submit </button>
 
 	</div>
+	</form>
 	<!-- /.container -->
 
 	{% include 'commonlibsfooter.html' %}
