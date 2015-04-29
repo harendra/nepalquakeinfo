@@ -101,7 +101,7 @@ function MapHandlerG() {
             var marker=createMarker(latlng,'name','location');
         }
         map.setCenter(marker.getPosition());
-        map.setZoom(5);
+        //map.setZoom(12);
     }
     
     this.changeFocus=function(latlng,zoomlevel){

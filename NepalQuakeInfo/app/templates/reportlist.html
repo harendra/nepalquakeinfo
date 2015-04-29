@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+{% include 'commonlibsheader.html' %}
+
+</head>
+
+<style>
+	#canvas{
+		width:99%;
+		height:300px;
+	}
+</style>
+
+<body onload="new ReportList().initialize()">
+
+{% include 'header.html' %}
+
+    <!-- Page Content -->
+    <div class="container">
+    <div class="mapcontainer">
+			<div id="canvas"></div>
+		</div>
+	<table class="table table-bordered">
+	  <tr>
+		  <th>Reported Date</th>
+		  <th>Type</th>
+		  <th>Address</th>
+		  <th>Status</th>
+		  <th>Details Link</th>	  
+	  </tr>
+	  
+	  {% for item in data %}
+	  	<tr>
+	  		<td>{{item.reported_date}}</td>
+	  		<td>{{item.help_type}}</td>
+	  		<td>{{item.help_address}}</td>
+	  		<td>{{item.status}}</td>
+	  		<td>details</td>
+	  	</tr>
+	  {% endfor %}
+	</table>
+    </div>
+    <!-- /.container -->
+
+{% include 'commonlibsfooter.html' %}
+
+<div class="mapdata" style="display:none">{{mapdata}}</div>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxnYgT_T-OyegGfQsdfR3fmlBbhATmTNQ&sensor=true"></script>
+	<script src="/scripts/js/maphandlergoogle.js"></script>
+	<script src="/scripts/js/reportlist.js"></script>
+
+</body>
+
+</html>

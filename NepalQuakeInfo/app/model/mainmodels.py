@@ -7,8 +7,6 @@ Created on Apr 28, 2015
 from google.appengine.ext import ndb
 
 class HelpRequestReport(ndb.Model):
-    attributes = [ "reporter_name", "reporter_email", "reporter_phone", "help_type", "help_address", "latitude", "longitude", "freetext", "imagelink"]
-
     reporter_name=ndb.StringProperty()
     reporter_email=ndb.StringProperty()
     reporter_phone=ndb.StringProperty()

@@ -7,6 +7,9 @@ function NewReportHandler(){
 		maphandler.createMarkableMap(mapCallback,defaultlocation,"canvas");
 		
 		//send report
+		$(".submit").click(function(){
+			sendReport();
+		});
 	}
 	
 	function sendReport(){
@@ -53,11 +56,15 @@ function NewReportHandler(){
 				imagelink:imagelink
 		};
 		
-		displayWait("wait");
+		//displayWait("wait");
+		console.log(sendobject);
+		
 		$.post("/addnewhelpreport",sendobject,function(result){
+			console.log(result);
 			result=JSON.parse(result);
+			console.log(result);
 			if(result["result"]=="success"){
-				window.location="/";
+				window.location="/thanks"
 			}
 		});
 	}

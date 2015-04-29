@@ -7,66 +7,85 @@ Created on Apr 28, 2015
 import logging
 
 from basehandler.BaseHandler import BaseHandler
-<<<<<<< HEAD
-from model.mainmodels import HelpRequestReport
-=======
 from datetime import datetime
 import uuid
 from datahandlers.dao.HelpRequestReportDAO import HelpRequestReportDAO
 import json
->>>>>>> inputnewhelpreport
+import jinja2
+from model.mainmodels import HelpRequestReport
+from utils.OutputVerifier import OutputVerifier
 
 class HelpReportRequestAdder(BaseHandler):
-
-    @classmethod
-    def get_canonical_post_data(self,request):
-        data = dict()
-        for attr in HelpRequestReport.attributes:
-            data[attr]=request.get(attr)
-        return data
-
     def post(self):
-        post_data = HelpReportRequestAdder.get_canonical_post_data(self.request)
-        logging.info(post_data)
-        self.render_response("reportadded.html")
         result=None
         postparams=self.request.POST
+        logging.info(postparams)
         savedata={}
+        attributes = [ "reporter_name", "reporter_email", "reporter_phone", "help_type", "help_address", "latitude", "longitude", "details", "imagelink"]
         try:
-            savedata["reporter_name"]=postparams["reporter_name"].strip()
-            savedata["reporter_email"]=postparams["reporter_email"].strip()
-            savedata["reporter_phone"]=postparams["reporter_phone"].strip()
-            savedata["reported_date"]=datetime.now().strip()
-            savedata["help_type"]=postparams["help_type"].strip()
-            savedata["help_address"]=postparams["help_address"].strip()
-            if len(postparams["latitude"].strip())!=0 and len(postparams["longitude"].strip()!=0):
+            for key in attributes:
+                savedata[key]=postparams[key].strip()
+            if len(postparams["latitude"].strip())!=0 and len(postparams["longitude"].strip())!=0:
                 savedata["latitude"]=float(postparams["latitude"].strip())
                 savedata["longitude"]=float(postparams["longitude"].strip())
             else:
-                savedata["latitude"]=0;
-                savedata["longitude"]=0;
-            savedata["details"]=postparams["details"].strip()
-            savedata["imagelink"]=postparams["imagelink"].strip()
-            
-            new_enity_id=uuid.uuid4()
+                savedata["latitude"]=0.0;
+                savedata["longitude"]=0.0;      
+            savedata["reported_date"]=datetime.now()  
+            savedata["status"]="active" #this can be progress and complete    
+            new_enity_id=str(uuid.uuid4())
             helpdao=HelpRequestReportDAO(savedata,True,new_enity_id)
             helpdao.write_values()
-        except:
+        except Exception,e:
+            logging.exception(e)
             result={"result":"failure"}
-        if result!=None:
+        if result==None:
             result={"result":"success"}
-        return json.dumps(result)
+        logging.info(result)
+        self.response.write(json.dumps(result))
     
     def get(self):
         context={}
         self.render_response("addnewhelpreport.html",**context)
+        
+class Thanks(BaseHandler):
+    def get(self):
+        context={}
+        self.render_response("reportadded.html",**context)
 
 class HelpReportRequestGetter(BaseHandler):
     
     def post(self):
-        pass
+        getparams=self.request.POST
+        pageno=1
+        if "pageno" in getparams:
+            pageno=int(getparams["pageno"])
+        verified_entities=self.getData(pageno)
+        result={"result":"success","data":verified_entities}
+        self.response.write(result)
     
     def get(self):
-        pass
+        getparams=self.request.GET
+        pageno=1
+        if "pageno" in getparams:
+            pageno=int(getparams["pageno"])
+        verified_entities=self.getData(pageno)
+        mapdata=[]
+        for entity in verified_entities:
+            if entity["latitude"]!=0 and entity["longitude"]!=0:
+                mapdata.append({"latitude":entity["latitude"],"longitude":entity["longitude"]})
+        result={"result":"success","data":verified_entities,"nextpage":pageno+1,"mapdata":json.dumps(mapdata)}
+        self.render_response("reportlist.html",**result)
+    
+    def getData(self,pageno):
+        helpdao=HelpRequestReportDAO(None,False,None)
+        entities=helpdao.search(HelpRequestReport, offset=(pageno-1)*20, total=20)
+        en=OutputVerifier(entities)
+        verified_entities=en.verify()
+        return verified_entities
+        
+        
+        
+            
 
 
