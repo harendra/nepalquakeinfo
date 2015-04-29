@@ -11,11 +11,62 @@ function NewReportHandler(){
 	
 	function sendReport(){
 		
+		var reporter_name=$(".reporter_name").val();
+		if(reporter_name.length==0){
+			alert("Please enter your name");
+			return;
+		}
+		var reporter_email=$(".reporter_email").val();
+		if(reporter_email.length==0){
+			alert("Please enter your email");
+			return;
+		}
+		var reporter_phone=$(".reporter_phone").val();
+		if(reporter_phone.length==0){
+			alert("Please enter your phone number");
+			return;
+		}
+		var help_type=$("#help_type").val();
+		var details=$(".details").val();
+		if(details.length==0){
+			alert("Please enter details of the help");
+			return;
+		}
+		var help_address=$(".help_address").val();
+		if(help_address.length==0){
+			alert("Please enter the address/area.");
+			return;
+		}
+		var latitude=$(".latitude").val();
+		var longitude=$(".longitude").val();
+		var imagelink=$(".imagelink").val();
 		
+		var sendobject={
+				reporter_name:reporter_name,
+				reporter_email:reporter_email,
+				reporter_phone:reporter_phone,
+				help_type:help_type,
+				details:details,
+				help_address:help_address,
+				latitude:latitude,
+				longitude:longitude,
+				imagelink:imagelink
+		};
+		
+		displayWait("wait");
+		$.post("/addnewhelpreport",sendobject,function(result){
+			result=JSON.parse(result);
+			if(result["result"]=="success"){
+				window.location="/";
+			}
+		});
 	}
 	
 	function mapCallback(latlon,address,countryname){
-		
+		/*
+		 * Add latitude/longitude and address in the respective fields once
+		 * the user clicks the map.
+		 */
 		$(".latitude").val(latlon.lat());
 		$(".longitude").val(latlon.lng());
 		$(".help_address").val(address);
@@ -23,3 +74,4 @@ function NewReportHandler(){
 	}
 	
 }
+
